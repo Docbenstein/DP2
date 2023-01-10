@@ -1,4 +1,4 @@
-##Clustering of High-Z quasars from SDSS
+## Clustering of High-Z quasars from SDSS
 - Sample contains 4,426 luminous optical quasars
 - Redshift $2.9 \leq z \leq 5.4$
 - Power law fit $\xi(r) = (r/r_0)^{-\gamma}$: 
