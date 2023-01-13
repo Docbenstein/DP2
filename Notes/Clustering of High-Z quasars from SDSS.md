@@ -26,8 +26,9 @@
 - What does it mean to say, quasar locus crosses the stellar locus in color space at $z \approx 2.7$ [Fan 1999]?
 - What is the quasar selection algorithm in SDSS?
 - Overlapping plates?
+- Projected correlation function is what we are getting from direct astrometry observation?
 - 
-### Sample selection
+### Sample selection $f(z)$
 
 - 2.5 wide-field telescope, drift scan camera with 30 CCDs, images sky in 5 boad bands ($ugriz$)
 - Candiates for followup spectroscopy are selected using their colors, and arranged in spectro plates for [[double spectroscopy]]
@@ -41,19 +42,37 @@
 
 - Redshift space is where distances are obtained from redshift without any corrections for peculiar velocity of redshift errors.
 - Redshift space correlation function[Landy & Szalay(1993)]$$\xi(s) = \frac{\langle DD\rangle - 2\langle DR \rangle + \langle RR \rangle}{\langle RR\rangle}$$
-- **Jackknife**:  10 spatially contiguous subsambles are made from the data sets and jackknife samples are created by omitting each of these samples in turn and mean of the number of data points in bin $s$ for each jackknife samble is taken as $DD_{mean}$, used in place of $\langle DD \rangle$. Covaraince matrix is calculated as,$$Cov(\xi_i,\xi_j) = \frac{N-1}{N}\sum^N_{l=1} (\xi_i^l - \bar\xi_i)(\xi_j^l - \bar\xi_j)$$
+- **Jackknife d10**:  10 spatially contiguous subsambles are made from the data sets and jackknife samples are created by omitting each of these samples in turn and mean of the number of data points in bin $s$ for each jackknife samble is taken as $DD_{mean}$, used in place of $\langle DD \rangle$. Covaraince matrix is calculated as,$$Cov(\xi_i,\xi_j) = \frac{N-1}{N}\sum^N_{l=1} (\xi_i^l - \bar\xi_i)(\xi_j^l - \bar\xi_j)$$
 - **Poisson error estimator**: 
 
 ### Real Space correlation function
 
 - Redshift space distortion due to peculiar motion of quasars in the cluster, called **Fingers of God**.![Alt test](https://ned.ipac.caltech.edu/level5/March12/Coil/Figures/figure4.jpg "Fingers of God")
-- Projected correlation function $w_p(r_p)$: $$w_p(r_p) = 2 \int_0^\infty d\pi \xi_s(r_p, \pi)$$
+- Projected correlation function $w_p(r_p)$: $$w_p(r_p) = 2 \int_0^\infty d\pi \xi_s(r_p, \pi)$$ $2$?
 - where, $$\pi = \frac{s\cdot l}{|l|} \hspace{1cm} r_p = \sqrt{s\cdot s - \pi^2}$$
 - In practice integration is only upto $\pi_{cutoff} = 100h^{-1}Mpc$. 
-- Now relation between projected correlation function and real space correlation function:$$w_p(r_p) = 2\int_0^\infty dy\xi(\sqrt{r_p^2 + y^2})$$$$w_p(r_p) = 2\int_0^\infty \frac{rdr}{\sqrt{r^2 - r_p^2}}\xi(r)$$$$w_p(r_p) = r_p\left(\frac{r_o}{r_p}\right)^\gamma \frac{\Gamma(1/2)\Gamma[(\gamma -1)/2]}{\Gamma(\gamma/2)}$$
+- Now relation between projected correlation function and real space correlation function:$$w_p(r_p) = 2\int_0^\infty dy\xi(\sqrt{r_p^2 + y^2})$$$$w_p(r_p) = 2\int_0^\infty \frac{rdr}{\sqrt{r^2 - r_p^2}}\xi(r)$$Assuming power law $\xi(r) = \left(\frac{r}{r_0}\right)^{-\gamma}$$$w_p(r_p) = r_p\left(\frac{r_o}{r_p}\right)^\gamma \frac{\Gamma(1/2)\Gamma[(\gamma -1)/2]}{\Gamma(\gamma/2)}$$
 - Now angular correlation function can be fitted with this function to obtain $\gamma$ and $r_0$.
-- The predicted correlation function of the underlying dark matter at $r = 15h^{-1}Mpc$ is $\sim 0.014$ at $z = 3.5$, far below that of the current high redshift quasar sample $\sim 22.92$.
+- The predicted correlation of the underlying dark matter at $r = 15h^{-1}Mpc$ is $\sim 0.014$ at $z = 3.5$, far below that of the current high redshift quasar sample $\sim 22.92$.
 - The clustering of quasars increases strongly with redshift over the range probed by our sample.
+
+### Quasar lifetime, Threshold Halo mass, Effective bias
+
+- Quasar spatial density, $$\Phi(z) = \int_{M_{min}}^\infty dM \frac{t_Q}{t_H(M,z)}n(M,z)$$Adopted values of $\phi(z)$ are taken from the Maximum Likelihodd fitted quasar lumisoty function with variable power law index given by [Richard et al. (2006)], integrated from the faintest $i$-band magnitude $i = 20.2$, with some corrections.
+- Assumptions are:
+	0. Every dark matter halo harbors a SMBH, either active or dormant, and the resulting quasars have same clustering strength as their hosting halos.
+	1. Luminous quasars only reside in dark matter halos with mass above some threshold $M_{min}$.
+	2. Dark matter halos with $M \geq M_{min}$ host at most one active quasar at a time.
+	3. Probability that halo harbors an active quasar is the duty cycle $\frac{t_Q}{t_H}$
+	4. 
+-  Halo mass function,$$n(M,z)dM = -A\sqrt{\frac{2a}{\pi}}\frac{\rho_0}{M}\frac{\delta_c(z)}{\sigma^2(M)}\frac{d\sigma(M)}{dM}\left\{1 + \left[\frac{\sigma^2(M)}{a\delta^2_c(z)}\right]^p\right\}\exp{\left[-\frac{a\delta^2_c(z)}{2\sigma^2(M)}\right]}dM$$[Sheth & Tormen(1999)]
+- $t_H(M,z)=t_U(z_2) - t_U(z)$. [Lacey & Cole (1993)].
+- Assuming a $t_Q$, we can compute $M_{min}$ from equation of $\Phi(z)$.
+- $M_{min}$ gives $b_{eff}(M_{min},z)$. $$b_{eff}(M_{min},z) = \int_{M{min}}^\infty dM\frac{b(M,z)n(M,z)}{t_H(M,z)}\left[\int_{M_{min}}^\infty dM\frac{n(M,z)}{t_H(M,z)}\right]^{-1}$$
+- $b(M,z)$ from [Jing (1998)]
+- $$\xi_{model}(r,z) = b_{eff}^2\xi_m(r,z) = b_{eff}^2\xi_{m}(r)D^2(z)$$$\xi_{m}(r)$ is the present-day mass correlatioin function. $$\xi_m(r) = \frac{1}{2\pi^2}\int_0^\infty dk k^2P(k)\frac{\sin kr}{kr}$$$D(z)$ is the linear growth factor of fluctuations.
+- Averaging over certain redshift range,$$\bar\xi(r) = \frac{\int dV_c n^2_{QSO}(z)\xi_{model}(r,z)}{\int dV_c n^2_{QSO}(z)}$$
+- Iterate to find $t_Q$ which minimizes the difference between $\bar\xi(r)$ and $\xi(r)$. [Table 5 Shen et al. (2006)]
 
 ### Appendix A. Quasar redshift determination
 
