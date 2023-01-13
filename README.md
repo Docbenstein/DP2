@@ -1,2 +1,2 @@
-# DP2 project topic
-- Quasar clustering from PANStars
+# DP2 project
+- Topic: Quasar clustering from PANStars
